@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "905655826451",
+    "project_id": "argis-548d2",
+    "storage_bucket": "argis-548d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905655826451:android:2cfaa5335fbc080ffaa7e6",
+        "android_client_info": {
+          "package_name": "uz.univer.argis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905655826451-6b4tscbg0daik8vqlqj5o3bsk19odhbq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeVidaieoWDg-Kj_4C6AnmqlwlJ9ocIhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905655826451-6b4tscbg0daik8vqlqj5o3bsk19odhbq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
