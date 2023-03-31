@@ -1,5 +1,6 @@
 package uz.univer.argis
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,14 +12,16 @@ class MainActivity : AppCompatActivity() {
   private val repository = MainRepository()
   private lateinit var bind: ActivityMainBinding
 
-  private val listCity = ArrayList<Pair<String, ArrayList<String>>>()
+  //  private val viloyatlar = ArrayList<Pair<String, ArrayList<String>>>()
+  private val shaxarlar = ArrayList<Pair<String, ArrayList<String>>>()
+  private val tumanlar = ArrayList<Pair<String, ArrayList<String>>>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     bind = ActivityMainBinding.inflate(layoutInflater)
     setContentView(bind.root)
-    loadShaxar()
-
+    loadShaxalar()
+    loadTumanlar()
     val adapterRegions = ArrayAdapter(this, R.layout.item_product_type, repository.listRegions)
     bind.viloyat.setAdapter(adapterRegions)
 
@@ -27,21 +30,150 @@ class MainActivity : AppCompatActivity() {
 
         val key = repository.listRegions[position]
 
-        val adapterCity = ArrayAdapter(
-          this, R.layout.item_product_type, getShaxar(key)
+        val adapterShaxar = ArrayAdapter(
+          this, R.layout.item_product_type, viloyatlarBuyichaShaxar(key)
         )
-        bind.shaxar.setAdapter(adapterCity)
+        bind.shaxar.setAdapter(adapterShaxar)
 
+        val adapterTuman = ArrayAdapter(
+          this, R.layout.item_product_type, viloyatlarBuyichaTuman(key)
+        )
+        bind.tuman.setAdapter(adapterTuman)
       }
 
-    val adapter = ArrayAdapter(this, R.layout.item_product_type, repository.listRegions)
-//    bind.viloyat.setAdapter(adapterBrand)
+
+    bind.btnNext.setOnClickListener {
+      startActivity(Intent(this, LandPlotDataActivity::class.java))
+
+    }
+    bind.btnBack.setOnClickListener {
+      finish()
+    }
 
   }
 
-  private fun getShaxar(tuman: String): ArrayList<String> {
+  private fun loadShaxalar() {
+    shaxarlar.add(
+      Pair(
+        "Навоий", arrayListOf(
+          "Навоий ш.", "Заpафшон ш.", "Ғозғон ш."
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Наманган", arrayListOf(
+          "Наманган ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Самарқанд", arrayListOf(
+          "Самарқанд ш.",
+          "Каттақўрғон ш.",
+        )
+      )
+    )
+
+    shaxarlar.add(
+      Pair(
+        "Андижон", arrayListOf(
+          "Андижон ш.",
+          "Хонобод ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Қорақалпоғистон Республикаси", arrayListOf(
+          "Нукус ш."
+        )
+      )
+    )
+
+    shaxarlar.add(
+      Pair(
+        "Тошкент", arrayListOf(
+          "Тошкент ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Қашқадарё", arrayListOf(
+          "Қарши ш.",
+          "Шаҳрисабз ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Жиззах", arrayListOf(
+          "Жиззах ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Хоразм", arrayListOf(
+          "Урганч ш.",
+          "Хива ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Фарғона", arrayListOf(
+          "Фарғона ш.",
+          "Қўқон ш.",
+          "Қувасой ш.",
+          "Маpғилон ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Сурхондарё", arrayListOf(
+          "Термиз ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Сирдарё", arrayListOf(
+          "Гулистон ш.",
+          "Шиpин ш.",
+          "Янгиеp ш.",
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Бухоро", arrayListOf(
+          "Бухоро ш.",
+          "Когон ш."
+        )
+      )
+    )
+    shaxarlar.add(
+      Pair(
+        "Тошкент", arrayListOf(
+          "Нурафшон ш.",
+          "Олмалиқ ш.",
+          "Ангрен ш.",
+          "Бекобод ш.",
+          "Оҳангаpон ш.",
+          "Чиpчиқ ш.",
+          "Янгийўл ш.",
+        )
+      )
+    )
+  }
+
+  private fun viloyatlarBuyichaTuman(tuman: String): ArrayList<String> {
     var list = ArrayList<String>()
-    listCity.forEach {
+    tumanlar.forEach {
       if (it.first == tuman) {
         list = it.second
       }
@@ -49,12 +181,22 @@ class MainActivity : AppCompatActivity() {
     return list
   }
 
-  fun loadShaxar() {
-    listCity.add(
+  private fun viloyatlarBuyichaShaxar(tuman: String): ArrayList<String> {
+    var list = ArrayList<String>()
+    shaxarlar.forEach {
+      if (it.first == tuman) {
+        list = it.second
+      }
+    }
+    return list
+  }
+
+  fun loadTumanlar() {
+    tumanlar.add(
       Pair(
         "Навоий", arrayListOf(
-          "Навоий ш.",
-          "Заpафшон ш.",
+          "Навоий",
+          "Заpафшон",
           "Конимех",
           "Қизилтепа",
           "Навбаҳор",
@@ -63,15 +205,15 @@ class MainActivity : AppCompatActivity() {
           "Томди",
           "Учқудуқ",
           "Хатирчи",
-          "Ғозғон ш."
+          "Ғозғон "
         )
       )
     )
-    listCity.add(
+    tumanlar.add(
       Pair(
         "Наманган", arrayListOf(
           "Косонсой",
-          "Наманган ш.",
+          "Наманган ",
           "Норин",
           "Поп",
           "Тўрақўрғон",
@@ -84,11 +226,32 @@ class MainActivity : AppCompatActivity() {
         )
       )
     )
-    listCity.add(
+    tumanlar.add(
+      Pair(
+        "Қорақалпоғистон Республикаси", arrayListOf(
+          "Амударё",
+          "Беруний",
+          "Қораўзак",
+          "Кегейли",
+          "Қўнғирот",
+          "Қонликўл",
+          "Мўйноқ",
+          "Нукус",
+          "Тахиатош",
+          "Тахтакўпир",
+          "Тўрткўл",
+          "Хўжайли",
+          "Чимбой",
+          "Шуманай",
+          "Элликқалъа",
+        )
+      )
+    )
+    tumanlar.add(
       Pair(
         "Самарқанд", arrayListOf(
-          "Самарқанд ш.",
-          "Каттақўрғон ш.",
+          "Самарқанд",
+          "Каттақўрғон",
           "Оқдарё",
           "Булунғур",
           "Жомбой",
@@ -106,11 +269,11 @@ class MainActivity : AppCompatActivity() {
       )
     )
 
-    listCity.add(
+    tumanlar.add(
       Pair(
         "Андижон", arrayListOf(
-          "Андижон ш.",
-          "Хонобод ш.",
+          "Андижон ",
+          "Хонобод ",
           "Олтинкўл",
           "Балиқчи",
           "Бўстон",
@@ -128,7 +291,7 @@ class MainActivity : AppCompatActivity() {
       )
     )
 
-    listCity.add(
+    tumanlar.add(
       Pair(
         "Тошкент ш.", arrayListOf(
           "Учтепа",
@@ -147,11 +310,33 @@ class MainActivity : AppCompatActivity() {
         )
       )
     )
-    listCity.add(
+    tumanlar.add(
+      Pair(
+        "Тошкент", arrayListOf(
+          "Оққўрғон",
+          "Оҳангарон",
+          "Бекобод",
+          "Бўстонлиқ",
+          "Бўка",
+          "Қуйичирчиқ",
+          "Зангиота",
+          "Юқоричирчиқ",
+          "Қибрай",
+          "Паркент",
+          "Пскент",
+          "Ўртачирчиқ",
+          "Чиноз",
+          "Янгийўл",
+          "Тошкент",
+
+          )
+      )
+    )
+    tumanlar.add(
       Pair(
         "Қашқадарё", arrayListOf(
-          "Қарши ш.",
-          "Шаҳрисабз ш.",
+          "Қарши ",
+          "Шаҳрисабз ",
           "Ғузор",
           "Деҳқонобод",
           "Қамаши",
@@ -168,10 +353,10 @@ class MainActivity : AppCompatActivity() {
         )
       )
     )
-    listCity.add(
+    tumanlar.add(
       Pair(
         "Жиззах", arrayListOf(
-          "Жиззах ш.",
+          "Жиззах ",
           "туманлар:",
           "Арнасой",
           "Бахмал",
@@ -188,11 +373,11 @@ class MainActivity : AppCompatActivity() {
         )
       )
     )
-    listCity.add(
+    tumanlar.add(
       Pair(
         "Хоразм", arrayListOf(
-          "Урганч ш.",
-          "Хива ш.",
+          "Урганч ",
+          "Хива ",
           "Боғот",
           "Гурлан",
           "Қўшкўпир",
@@ -207,14 +392,9 @@ class MainActivity : AppCompatActivity() {
         )
       )
     )
-    listCity.add(
+    tumanlar.add(
       Pair(
-        "Хоразм", arrayListOf(
-          "Фарғона ш.",
-          "Қўқон ш.",
-          "Қувасой ш.",
-          "Маpғилон ш.",
-          "туманлар:",
+        "Фарғона", arrayListOf(
           "Олтиариқ",
           "Қўштепа",
           "Боғдод",
@@ -233,10 +413,9 @@ class MainActivity : AppCompatActivity() {
         )
       )
     )
-    listCity.add(
+    tumanlar.add(
       Pair(
         "Сурхондарё", arrayListOf(
-          "Термиз ш.",
           "Олтинсой",
           "Ангор",
           "Бойсун",
@@ -254,12 +433,9 @@ class MainActivity : AppCompatActivity() {
         )
       )
     )
-    listCity.add(
+    tumanlar.add(
       Pair(
         "Сирдарё", arrayListOf(
-          "Гулистон ш.",
-          "Шиpин ш.",
-          "Янгиеp ш .",
           "Оқолтин",
           "Боёвут",
           "Сайхунобод",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,247 +7,284 @@
     android:orientation="vertical"
     tools:context=".LandPlotDataActivity">
 
-    <TextView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Yer uchastka malumotlari"
-        android:textColor="@color/black"
-        android:textSize="23sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Kadastr raqami"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
-
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/kadastr"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Yer uchastka malumotlari"
             android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
+            android:textSize="23sp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Obyektning nomi"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
-
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/obyekt_nomi"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Obyektning manzili"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_input"
+            android:hint="Kadastr raqami"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/obyekt_manzili"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/kadastr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Xuquq turi"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_input"
+            android:hint="Obyektning nomi"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/xuquq_turi"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/obyekt_nomi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Davlat ruyxatiga olingan sana"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_input"
+            android:hint="Obyektning manzili"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/register_date"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/obyekt_manzili"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Maydon"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_input"
+            android:hint="Xuquq turi"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/maydon"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/xuquq_turi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Maqsad vazifasi"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_input"
+            android:hint="Davlat ruyxatiga olingan sana"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/maqsad"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/register_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Soliq zonasi"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_input"
+            android:hint="Maydon"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/soliq"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/maydon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/background_input"
-        android:hint="Qiymati (so'm)"
-        android:textColorHint="@color/space_grey"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_input"
+            android:hint="Maqsad vazifasi"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/cost"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/maqsad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey"
-            android:imeOptions="actionGo"
-            android:importantForAutofill="no"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            tools:ignore="LabelFor" />
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_input"
+            android:hint="Soliq zonasi"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/soliq"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_input"
+            android:hint="Qiymati (so'm)"
+            android:textColorHint="@color/space_grey"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/cost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="?actionBarSize"
+            android:background="@color/yellow"
+            android:text="Davom etish"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/yellow"
+            android:text="Orqaga qaytish"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>

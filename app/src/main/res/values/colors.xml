@@ -13,4 +13,15 @@
     <color name="stroke_color">#EEEEEE</color>
     <color name="grey">#FAFAFA</color>
     <color name="space_grey">#8A8A8A</color>
+
+
+    <color name="light_yellow">#EEFF41</color>
+    <color name="dark_yellow">#FFD600</color>
+    <color name="green">#64DD17</color>
+    <color name="light_green">#7CB342</color>
+    <color name="brown">#3E2723</color>
+    <color name="light_blue">#40C4FF</color>
+    <color name="violet">#7C4DFF</color>
+    <color name="orange">#FF6E40</color>
+
 </resources>

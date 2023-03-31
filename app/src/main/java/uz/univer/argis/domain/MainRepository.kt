@@ -23,6 +23,7 @@ class MainRepository {
     listRegions.add("Фарғона")
     listRegions.add("Хоразм")
     listRegions.add("Тошкент ш.")
+    listRegions.add("Қорақалпоғистон Республикаси")
   }
 
   fun loadShaxar() {
