@@ -16,6 +16,7 @@ class EstateDataActivity : AppCompatActivity() {
 
     binding.btnNext.setOnClickListener {
       startActivity(Intent(this, MapsActivity::class.java))
+      finish()
     }
     binding.btnBack.setOnClickListener {
       finish()

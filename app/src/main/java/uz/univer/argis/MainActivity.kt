@@ -151,8 +151,7 @@ class MainActivity : AppCompatActivity() {
     shaxarlar.add(
       Pair(
         "Бухоро", arrayListOf(
-          "Бухоро ш.",
-          "Когон ш."
+          "Бухоро ш.", "Когон ш."
         )
       )
     )
@@ -206,6 +205,23 @@ class MainActivity : AppCompatActivity() {
           "Учқудуқ",
           "Хатирчи",
           "Ғозғон "
+        )
+      )
+    )
+    tumanlar.add(
+      Pair(
+        "Бухоро", arrayListOf(
+          "Олот",
+          "Бухоро",
+          "Вобкент",
+          "Ғиждувон",
+          "Когон",
+          "Қоракўл",
+          "Қоровулбозор",
+          "Пешку",
+          "Ромитан",
+          "Жондоp",
+          "Шофиркон"
         )
       )
     )

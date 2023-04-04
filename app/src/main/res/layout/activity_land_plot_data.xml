@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     android:orientation="vertical"
     tools:context=".LandPlotDataActivity">
 
@@ -24,7 +25,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/background_input"
             android:hint="Kadastr raqami"
@@ -50,7 +50,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:hint="Obyektning nomi"
@@ -76,7 +75,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:hint="Obyektning manzili"
@@ -102,7 +100,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:hint="Xuquq turi"
@@ -128,7 +125,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:hint="Davlat ruyxatiga olingan sana"
@@ -154,7 +150,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:hint="Maydon"
@@ -180,7 +175,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:hint="Maqsad vazifasi"
@@ -206,7 +200,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:hint="Soliq zonasi"
@@ -232,7 +225,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:hint="Qiymati (so'm)"

@@ -58,6 +58,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation 'com.google.android.gms:play-services-base:8.3.0'
+
 }
 
 
