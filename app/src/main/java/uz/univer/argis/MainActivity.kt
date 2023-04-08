@@ -1,12 +1,25 @@
 package uz.univer.argis
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import org.apache.poi.hssf.usermodel.HSSFWorkbook
+import org.library.worksheet.cellstyles.WorkSheet
 import uz.univer.argis.databinding.ActivityMainBinding
 import uz.univer.argis.domain.MainRepository
+import uz.univer.argis.models.PlaceDate
+import uz.univer.argis.models.export_data.StaticValue
+import java.io.File
+import java.io.FileOutputStream
+
 
 class MainActivity : AppCompatActivity() {
   private val repository = MainRepository()
@@ -15,9 +28,32 @@ class MainActivity : AppCompatActivity() {
   //  private val viloyatlar = ArrayList<Pair<String, ArrayList<String>>>()
   private val shaxarlar = ArrayList<Pair<String, ArrayList<String>>>()
   private val tumanlar = ArrayList<Pair<String, ArrayList<String>>>()
+  private val filePath: File = File("${Environment.getExternalStorageDirectory()}/Demo.xls")
+
+  private val locationPermissionRequest = registerForActivityResult(
+    ActivityResultContracts.RequestMultiplePermissions()
+  ) { permissions ->
+    if (checkWriteFilePermissionGranted()) {
+      Toast.makeText(this, "permission success", Toast.LENGTH_SHORT).show()
+    } else {
+      Toast.makeText(this, "permission died", Toast.LENGTH_SHORT).show()
+    }
+  }
+
+  private fun checkWriteFilePermissionGranted() = (ActivityCompat.checkSelfPermission(
+    this, Manifest.permission.WRITE_EXTERNAL_STORAGE
+  ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+    this, Manifest.permission.READ_EXTERNAL_STORAGE
+  ) == PackageManager.PERMISSION_GRANTED)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    locationPermissionRequest.launch(
+      arrayOf(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
+      )
+    )
+
     bind = ActivityMainBinding.inflate(layoutInflater)
     setContentView(bind.root)
     loadShaxalar()
@@ -27,14 +63,11 @@ class MainActivity : AppCompatActivity() {
 
     bind.viloyat.onItemClickListener =
       AdapterView.OnItemClickListener { parent, view, position, id ->
-
         val key = repository.listRegions[position]
-
         val adapterShaxar = ArrayAdapter(
           this, R.layout.item_product_type, viloyatlarBuyichaShaxar(key)
         )
         bind.shaxar.setAdapter(adapterShaxar)
-
         val adapterTuman = ArrayAdapter(
           this, R.layout.item_product_type, viloyatlarBuyichaTuman(key)
         )
@@ -43,14 +76,104 @@ class MainActivity : AppCompatActivity() {
 
 
     bind.btnNext.setOnClickListener {
-      startActivity(Intent(this, LandPlotDataActivity::class.java))
-
+      loadValuePlaceData()
     }
     bind.btnBack.setOnClickListener {
+//      loadExel()
       finish()
+//      buttonCreateExcel()
     }
+    bind.generate.setOnClickListener {
+      loadExel()
+    }
+  }
+
+  private fun loadValuePlaceData() {
+    bind.apply {
+      if (viloyat.text.isEmpty()) {
+        viloyat.error = "Viloyatni tanlang !!!"
+        return
+      }
+      viloyat.error = null
+      if (shaxar.text.isEmpty()) {
+        shaxar.error = "Shaxarni tanlang !!!"
+        return
+      }
+      shaxar.error = null
+      if (tuman.text.isEmpty()) {
+        Toast.makeText(this@MainActivity, "Malumotlarni tuliq kiriting", Toast.LENGTH_SHORT).show()
+        tuman.error = "Tumani tanlang !!!"
+        return
+      }
+      tuman.error = null
+
+      if (qishloq.text.toString().isEmpty()) {
+        qishloq.error = "Qishloqni tanlang !!!"
+        return
+      }
+      qishloq.error = null
+
+      if (MFY.text.toString().isEmpty()) {
+        MFY.error = "MFY kiriting !!!"
+        return
+      }
+      MFY.error = null
+
+      if (yerToifasi.text.toString().isEmpty()) {
+        yerToifasi.error = "Yer toifasi tanlang !!!"
+        return
+      }
+      yerToifasi.error = null
+      if (yerVaMulk.text.toString().isEmpty()) {
+        yerVaMulk.error = "Yer va mulk foydalanuvchisini tanlang tanlang !!!"
+        return
+      } else {
+        yerVaMulk.error = null
+        StaticValue.placeDate = PlaceDate(
+          tuman = tuman.text.toString(),
+          shaxar = shaxar.text.toString(),
+          viloyat = viloyat.text.toString(),
+          qishloq = qishloq.text.toString(),
+          MFY = MFY.text.toString(),
+          yerToifasi = yerToifasi.text.toString(),
+          yerMulkFoydalanuvchisi = yerVaMulk.text.toString(),
+        )
+        startActivity(Intent(this@MainActivity, LandPlotDataActivity::class.java))
+      }
+    }
+  }
+
+  fun buttonCreateExcel() {
+    val hssfWorkbook = HSSFWorkbook()
+    val hssfSheet = hssfWorkbook.createSheet("Custom Sheet")
+    val hssfRow = hssfSheet.createRow(0)
+    val hssfCell = hssfRow.createCell(0)
+    hssfCell.setCellValue("ExelText")
+    try {
+      if (!filePath.exists()) {
+        filePath.createNewFile()
+      }
+      val fileOutputStream = FileOutputStream(filePath)
+      hssfWorkbook.write(fileOutputStream)
+      if (fileOutputStream != null) {
+        fileOutputStream.flush()
+        fileOutputStream.close()
+      }
+    } catch (e: Exception) {
+      e.printStackTrace()
+    }
+  }
+
+  private fun loadExel() {
+    val destination: String =
+      Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath
+    val workSheet =
+      WorkSheet.Builder(this, this.resources.getString(R.string.app_name)).setSheet(arrayListOf({
+        "Hello world I am here"
+      })).writeSheet()
 
   }
+
 
   private fun loadShaxalar() {
     shaxarlar.add(

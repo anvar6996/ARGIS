@@ -5,7 +5,7 @@ import uz.univer.argis.models.LandPlotData
 import uz.univer.argis.models.PlaceDate
 
 object StaticValue {
-  val placeDate: PlaceDate? = null
-  val landPlotData: LandPlotData? = null
-  val estateData: EstateData? = null
+  var placeDate: PlaceDate? = null
+  var landPlotData: LandPlotData? = null
+  var estateData: EstateData? = null
 }
