@@ -12,7 +12,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.library.worksheet.cellstyles.WorkSheet
+import uz.univer.argis.common.Constants
+import uz.univer.argis.common.ExcelUtils
 import uz.univer.argis.databinding.ActivityMainBinding
 import uz.univer.argis.domain.MainRepository
 import uz.univer.argis.models.PlaceDate
@@ -85,6 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
     bind.generate.setOnClickListener {
       loadExel()
+//      buttonCreateExcel()
     }
   }
 
@@ -165,12 +167,10 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun loadExel() {
-    val destination: String =
-      Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath
-    val workSheet =
-      WorkSheet.Builder(this, this.resources.getString(R.string.app_name)).setSheet(arrayListOf({
-        "Hello world I am here"
-      })).writeSheet()
+    var listData = ExcelUtils.readFromExcelWorkbook(this, Constants.EXCEL_FILE_NAME)
+    ExcelUtils.exportDataIntoWorkbook(
+      this, Constants.EXCEL_FILE_NAME, tumanlar.first().second
+    )
 
   }
 
