@@ -23,7 +23,15 @@
         android:theme="@style/Theme.ARGIS"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="uz.univer.argis.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider" />
+        </provider>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

@@ -3,6 +3,7 @@ package uz.univer.argis
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.widget.AdapterView
@@ -11,9 +12,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ShareCompat
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import uz.univer.argis.common.Constants
 import uz.univer.argis.common.ExcelUtils
+import uz.univer.argis.common.FileShareUtils
 import uz.univer.argis.databinding.ActivityMainBinding
 import uz.univer.argis.domain.MainRepository
 import uz.univer.argis.models.PlaceDate
@@ -168,10 +171,39 @@ class MainActivity : AppCompatActivity() {
 
   private fun loadExel() {
     var listData = ExcelUtils.readFromExcelWorkbook(this, Constants.EXCEL_FILE_NAME)
-    ExcelUtils.exportDataIntoWorkbook(
-      this, Constants.EXCEL_FILE_NAME, tumanlar.first().second
+    val isExcelGenerated = ExcelUtils.exportDataIntoWorkbook(
+      application,
+      Constants.EXCEL_FILE_NAME,
+      StaticValue.estateData,
+      StaticValue.landPlotData,
+      StaticValue.placeDate
     )
 
+    if (isExcelGenerated) {
+      Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+      val data = ExcelUtils.readFromExcelWorkbook(this, Constants.EXCEL_FILE_NAME)
+      Toast.makeText(this, data[0].length.toString(), Toast.LENGTH_SHORT).show()
+      onShareButtonClicked()
+    } else {
+      Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
+    }
+  }
+
+  fun onShareButtonClicked() {
+    val fileUri: Uri = initiateSharing()
+    fileUri.let { launchShareFileIntent(it) }
+    launchShareFileIntent(fileUri)
+  }
+
+  private fun launchShareFileIntent(uri: Uri) {
+    val intent = ShareCompat.IntentBuilder.from(this).setType("application/pdf").setStream(uri)
+      .setChooserTitle("Select application to share file").createChooserIntent()
+      .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    startActivity(intent)
+  }
+
+  fun initiateSharing(): Uri {
+    return FileShareUtils.accessFile(application, Constants.EXCEL_FILE_NAME)
   }
 
 

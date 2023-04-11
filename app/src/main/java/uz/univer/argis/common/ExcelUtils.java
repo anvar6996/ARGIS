@@ -21,6 +21,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import uz.univer.argis.models.EstateData;
+import uz.univer.argis.models.LandPlotData;
+import uz.univer.argis.models.PlaceDate;
+import uz.univer.argis.models.export_data.StaticValue;
+
 /**
  * Excel Worksheet Utility Methods
  * <p>
@@ -52,9 +57,9 @@ public class ExcelUtils {
      *
      * @param context  - Pass the application context
      * @param fileName - Pass the desired fileName for the output excel Workbook
-     * @param dataList - Contains the actual data to be displayed in excel
+     *                 //     * @param dataList - Contains the actual data to be displayed in excel
      */
-    public static boolean exportDataIntoWorkbook(Context context, String fileName, List<String> dataList) {
+    public static boolean exportDataIntoWorkbook(Context context, String fileName, EstateData estateData, LandPlotData landPlotData, PlaceDate placeDate) {
         boolean isWorkbookWrittenIntoStorage;
 
         // Check if available and not read only
@@ -74,7 +79,7 @@ public class ExcelUtils {
         sheet.setColumnWidth(1, (15 * 400));
 
         setHeaderRow();
-        fillDataIntoExcel(dataList);
+        fillDataIntoExcel(estateData, landPlotData, placeDate);
         isWorkbookWrittenIntoStorage = storeExcelInStorage(context, fileName);
 
         return isWorkbookWrittenIntoStorage;
@@ -117,11 +122,11 @@ public class ExcelUtils {
         Row headerRow = sheet.createRow(0);
 
         cell = headerRow.createCell(0);
-        cell.setCellValue("Name");
+        cell.setCellValue("Malumotlar nomi");
         cell.setCellStyle(headerCellStyle);
 
         cell = headerRow.createCell(1);
-        cell.setCellValue("Phone Number");
+        cell.setCellValue("Yer malumotlari");
         cell.setCellStyle(headerCellStyle);
     }
 
@@ -129,28 +134,21 @@ public class ExcelUtils {
      * Fills Data into Excel Sheet
      * <p>
      * NOTE: Set row index as i+1 since 0th index belongs to header row
-     *
-     * @param dataList - List containing data to be filled into excel
+     * <p>
+     * //     * @param dataList - List containing data to be filled into excel
      */
-    private static void fillDataIntoExcel(List<String> dataList) {
-        for (int i = 0; i < dataList.size(); i++) {
+    private static void fillDataIntoExcel(EstateData estateData, LandPlotData landPlotData, PlaceDate placeDate) {
+        for (int i = 0; i < StaticValue.INSTANCE.getPlaceDataFildsName().length; i++) {
             // Create a New Row for every new entry in list
             Row rowData = sheet.createRow(i + 1);
 
             // Create Cells for each row
             cell = rowData.createCell(0);
-            cell.setCellValue(dataList.get(i));
-
+            cell.setCellValue(StaticValue.INSTANCE.getPlaceDataFildsName()[i]);
             cell = rowData.createCell(1);
-            if (dataList.get(i) != null) {
-                StringBuilder stringBuilder = new StringBuilder();
-
-                // Nested loop: Since one user can have multiple numbers
-                cell.setCellValue(String.valueOf(stringBuilder));
-
-            } else {
-                cell.setCellValue("No Phone Number");
-            }
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(placeDate.getViloyat()).append("\n").append(placeDate.getShaxar()).append("\n").append(placeDate.getTuman()).append("\n").append(placeDate.getQishloq()).append("\n").append(placeDate.getMFY()).append("\n").append(placeDate.getYerMulkFoydalanuvchisi()).append("\n").append(placeDate.getYerToifasi()).append("\n");
+            cell.setCellValue(String.valueOf(stringBuilder));
         }
     }
 
@@ -218,7 +216,7 @@ public class ExcelUtils {
             for (Row row : sheet) {
                 int index = 0;
                 List<String> rowDataList = new ArrayList<>();
-                List<String> phoneNumberList = new ArrayList<>();
+//                List<String> phoneNumberList = new ArrayList<>();
 
                 if (row.getRowNum() > 0) {
                     // Iterate through all the columns in a row (Excluding header row)
@@ -240,7 +238,7 @@ public class ExcelUtils {
 
                     // Adding cells with phone numbers to phoneNumberList
                     for (int i = 1; i < rowDataList.size(); i++) {
-                        phoneNumberList.add(rowDataList.get(i));
+//                        phoneNumberList.add(rowDataList.get(i));
                     }
 
                     /**

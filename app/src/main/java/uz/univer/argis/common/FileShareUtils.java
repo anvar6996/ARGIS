@@ -15,7 +15,7 @@ public class FileShareUtils {
     /**
      * Access file from 'Application Directory'
      *
-     * @param context - application context
+     * @param context  - application context
      * @param fileName - name of file inside application directory to be shared
      * @return uri - returns URI of file.
      */
@@ -24,7 +24,7 @@ public class FileShareUtils {
 
         if (file.exists()) {
             return FileProvider.getUriForFile(context,
-                    "com.ranit.contacts.fileprovider", file);
+                    "uz.univer.argis.fileprovider", file);
         } else {
             return null;
         }
