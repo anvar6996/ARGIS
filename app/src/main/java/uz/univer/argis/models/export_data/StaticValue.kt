@@ -13,7 +13,6 @@ object StaticValue {
     "Shaxar",
     "Tuman",
     "Qishloq",
-    "Qishloq",
     "MFY/SHFY",
     "Yer va mulk foydalanuvchisi",
     "Yer toifasi",

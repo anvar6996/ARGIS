@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import uz.univer.argis.common.Constants
 import uz.univer.argis.common.ExcelUtils
 import uz.univer.argis.common.FileShareUtils
 import uz.univer.argis.databinding.ActivityEstateDataBinding
+import uz.univer.argis.domain.MapsActivity
 import uz.univer.argis.models.EstateData
 import uz.univer.argis.models.export_data.StaticValue
 import java.text.SimpleDateFormat
@@ -90,11 +90,11 @@ class EstateDataActivity : AppCompatActivity() {
           soliq = soliq.text.toString(),
           qiymati = cost.text.toString(),
         )
-        Toast.makeText(this@EstateDataActivity, StaticValue.placeDate?.viloyat, Toast.LENGTH_SHORT)
-          .show()
-//        generateExelFile()
-//        startActivity(Intent(this@EstateDataActivity, MapsActivity::class.java))
-//        finish()
+        generateExelFile()
+      }
+      binding.btnMap.setOnClickListener {
+        startActivity(Intent(this@EstateDataActivity, MapsActivity::class.java))
+        finish()
       }
     }
   }
@@ -108,10 +108,7 @@ class EstateDataActivity : AppCompatActivity() {
       StaticValue.placeDate
     )
     if (isExcelGenerated) {
-      Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
       onShareButtonClicked()
-    } else {
-      Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
     }
   }
 
@@ -129,7 +126,9 @@ class EstateDataActivity : AppCompatActivity() {
   }
 
   fun initiateSharing(): Uri {
-    return FileShareUtils.accessFile(application, Constants.EXCEL_FILE_NAME)
+    return FileShareUtils.accessFile(
+      application, getCurrentDate() + getCurrentTime() + Constants.EXCEL_FILE_NAME
+    )
   }
 
   @SuppressLint("SimpleDateFormat")

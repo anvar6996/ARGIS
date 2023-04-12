@@ -137,22 +137,131 @@ public class ExcelUtils {
      * <p>
      * //     * @param dataList - List containing data to be filled into excel
      */
+
+//    ArrayList aataFildsName = ArrayList<String>(
+//            "Kadstr raqami",
+//    "Obyektning nomi",
+//            "Obyektning manzili",
+//            "Xuquq turi",
+//            "Davlat ruyxatiga olingan sana",
+//            "Maydon",
+//            "Maqsad vazifasi",
+//            "Soliq zonasi",
+//            "Qiymati (so'm)"
+//            )
     private static void fillDataIntoExcel(EstateData estateData, LandPlotData landPlotData, PlaceDate placeDate) {
         for (int i = 0; i < StaticValue.INSTANCE.getPlaceDataFildsName().length; i++) {
             // Create a New Row for every new entry in list
             Row rowData = sheet.createRow(i + 1);
-
-            // Create Cells for each row
             cell = rowData.createCell(0);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(placeDate.getViloyat()).append("\n").append(placeDate.getShaxar()).append("\n").append(placeDate.getTuman()).append("\n").append(placeDate.getQishloq()).append("\n").append(placeDate.getMFY()).append("\n").append(placeDate.getYerMulkFoydalanuvchisi()).append("\n").append(placeDate.getYerToifasi()).append("\n");
             cell.setCellValue(StaticValue.INSTANCE.getPlaceDataFildsName()[i]);
             cell = rowData.createCell(1);
+            switch (i) {
+                case 0: {
+                    cell.setCellValue(placeDate.getViloyat());
+                }
+                break;
+                case 1: {
+                    cell.setCellValue(placeDate.getShaxar());
+                }
+                break;
+                case 2: {
+                    cell.setCellValue(placeDate.getTuman());
+                }
+                break;
+                case 3: {
+                    cell.setCellValue(placeDate.getQishloq());
+                }
+                break;
+                case 4: {
+                    cell.setCellValue(placeDate.getMFY());
+                }
+                break;
+                case 5: {
+                    cell.setCellValue(placeDate.getYerMulkFoydalanuvchisi());
+                }
+                break;
+                case 6: {
+                    cell.setCellValue(placeDate.getYerToifasi());
+                }
+                break;
+            }
+        }
+        for (int i = 0; i < StaticValue.INSTANCE.getDataFildsName().length; i++) {
+            // Create a New Row for every new entry in list
+            Row rowData = sheet.createRow(i + 9);
+            cell = rowData.createCell(0);
+            cell.setCellValue(StaticValue.INSTANCE.getDataFildsName()[i]);
+            StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(placeDate.getViloyat()).append("\n").append(placeDate.getShaxar()).append("\n").append(placeDate.getTuman()).append("\n").append(placeDate.getQishloq()).append("\n").append(placeDate.getMFY()).append("\n").append(placeDate.getYerMulkFoydalanuvchisi()).append("\n").append(placeDate.getYerToifasi()).append("\n");
-            cell.setCellValue(String.valueOf(stringBuilder));
+            cell = rowData.createCell(1);
+            switch (i) {
+                case 0: {
+                    cell.setCellValue(landPlotData.getKadastr());
+                }break;
+                case 1: {
+                    cell.setCellValue(landPlotData.getObyektNomi());
+                }break;
+                case 2: {
+                    cell.setCellValue(landPlotData.getObyektManzili());
+                }break;
+                case 3: {
+                    cell.setCellValue(landPlotData.getXuquqTuri());
+                }break;
+                case 4: {
+                    cell.setCellValue(landPlotData.getRuyxatSanasi());
+                }break;
+                case 5: {
+                    cell.setCellValue(landPlotData.getMaydon());
+                }break;
+                case 6: {
+                    cell.setCellValue(landPlotData.getMaqsad());
+                }break;
+                case 7: {
+                    cell.setCellValue(landPlotData.getSoliq());
+                }break;
+                case 8: {
+                    cell.setCellValue(landPlotData.getQiymati());
+                }break;
+            }
+        }
+        for (int i = 0; i < StaticValue.INSTANCE.getDataFildsName().length; i++) {
+            // Create a New Row for every new entry in list
+            Row rowData = sheet.createRow(i + 19);
+            cell = rowData.createCell(0);
+            cell.setCellValue(StaticValue.INSTANCE.getDataFildsName()[i]);
+            cell = rowData.createCell(1);
+            switch (i) {
+                case 0: {
+                    cell.setCellValue(estateData.getKadastr());
+                }break;
+                case 1: {
+                    cell.setCellValue(estateData.getObyektNomi());
+                }break;
+                case 2: {
+                    cell.setCellValue(estateData.getObyektManzili());
+                }break;
+                case 3: {
+                    cell.setCellValue(estateData.getXuquqTuri());
+                }break;
+                case 4: {
+                    cell.setCellValue(estateData.getRuyxatSanasi());
+                }break;
+                case 5: {
+                    cell.setCellValue(estateData.getMaydon());
+                }break;
+                case 6: {
+                    cell.setCellValue(estateData.getMaqsad());
+                }break;
+                case 7: {
+                    cell.setCellValue(estateData.getSoliq());
+                }break;
+                case 8: {
+                    cell.setCellValue(estateData.getQiymati());
+                }break;
+            }
         }
     }
-
     /**
      * Store Excel Workbook in external storage
      *

@@ -1,6 +1,7 @@
 package uz.univer.argis
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -23,6 +24,8 @@ import uz.univer.argis.models.PlaceDate
 import uz.univer.argis.models.export_data.StaticValue
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -83,13 +86,7 @@ class MainActivity : AppCompatActivity() {
       loadValuePlaceData()
     }
     bind.btnBack.setOnClickListener {
-//      loadExel()
       finish()
-//      buttonCreateExcel()
-    }
-    bind.generate.setOnClickListener {
-      loadExel()
-//      buttonCreateExcel()
     }
   }
 
@@ -134,11 +131,10 @@ class MainActivity : AppCompatActivity() {
         return
       } else {
         yerVaMulk.error = null
-        Toast.makeText(this@MainActivity, viloyat.text.toString(), Toast.LENGTH_SHORT).show()
         StaticValue.placeDate = PlaceDate(
           tuman = tuman.text.toString(),
           shaxar = shaxar.text.toString(),
-          viloyat = viloyat.text.toString() + "argis",
+          viloyat = viloyat.text.toString(),
           qishloq = qishloq.text.toString(),
           MFY = MFY.text.toString(),
           yerToifasi = yerToifasi.text.toString(),
@@ -148,6 +144,47 @@ class MainActivity : AppCompatActivity() {
       }
     }
   }
+
+  private fun generateExelFile() {
+    val isExcelGenerated = ExcelUtils.exportDataIntoWorkbook(
+      application,
+      getCurrentDate() + getCurrentTime() + Constants.EXCEL_FILE_NAME,
+      StaticValue.estateData,
+      StaticValue.landPlotData,
+      StaticValue.placeDate
+    )
+    if (isExcelGenerated) {
+      Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+      onShareButtonClicked()
+    } else {
+      Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
+    }
+  }
+
+  fun onShareButtonClicked() {
+    val fileUri: Uri = initiateSharing()
+    fileUri.let { launchShareFileIntent(it) }
+    launchShareFileIntent(fileUri)
+  }
+
+  private fun launchShareFileIntent(uri: Uri) {
+    val intent = ShareCompat.IntentBuilder.from(this).setType("application/pdf").setStream(uri)
+      .setChooserTitle("Select application to share file").createChooserIntent()
+      .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    startActivity(intent)
+  }
+
+  fun initiateSharing(): Uri {
+    return FileShareUtils.accessFile(
+      application, getCurrentDate() + getCurrentTime() + Constants.EXCEL_FILE_NAME
+    )
+  }
+
+  @SuppressLint("SimpleDateFormat")
+  fun getCurrentDate() = SimpleDateFormat("yyyy-MM-dd").format(Date()).toString()
+
+  @SuppressLint("SimpleDateFormat")
+  fun getCurrentTime() = SimpleDateFormat("HH:mm").format(Date()).toString()
 
   fun buttonCreateExcel() {
     val hssfWorkbook = HSSFWorkbook()
@@ -188,23 +225,6 @@ class MainActivity : AppCompatActivity() {
     } else {
       Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
     }
-  }
-
-  fun onShareButtonClicked() {
-    val fileUri: Uri = initiateSharing()
-    fileUri.let { launchShareFileIntent(it) }
-    launchShareFileIntent(fileUri)
-  }
-
-  private fun launchShareFileIntent(uri: Uri) {
-    val intent = ShareCompat.IntentBuilder.from(this).setType("application/pdf").setStream(uri)
-      .setChooserTitle("Select application to share file").createChooserIntent()
-      .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    startActivity(intent)
-  }
-
-  fun initiateSharing(): Uri {
-    return FileShareUtils.accessFile(application, Constants.EXCEL_FILE_NAME)
   }
 
 
