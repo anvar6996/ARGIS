@@ -134,10 +134,11 @@ class MainActivity : AppCompatActivity() {
         return
       } else {
         yerVaMulk.error = null
+        Toast.makeText(this@MainActivity, viloyat.text.toString(), Toast.LENGTH_SHORT).show()
         StaticValue.placeDate = PlaceDate(
           tuman = tuman.text.toString(),
           shaxar = shaxar.text.toString(),
-          viloyat = viloyat.text.toString(),
+          viloyat = viloyat.text.toString() + "argis",
           qishloq = qishloq.text.toString(),
           MFY = MFY.text.toString(),
           yerToifasi = yerToifasi.text.toString(),

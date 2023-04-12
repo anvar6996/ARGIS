@@ -144,9 +144,10 @@ public class ExcelUtils {
 
             // Create Cells for each row
             cell = rowData.createCell(0);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(placeDate.getViloyat()).append("\n").append(placeDate.getShaxar()).append("\n").append(placeDate.getTuman()).append("\n").append(placeDate.getQishloq()).append("\n").append(placeDate.getMFY()).append("\n").append(placeDate.getYerMulkFoydalanuvchisi()).append("\n").append(placeDate.getYerToifasi()).append("\n");
             cell.setCellValue(StaticValue.INSTANCE.getPlaceDataFildsName()[i]);
             cell = rowData.createCell(1);
-            StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(placeDate.getViloyat()).append("\n").append(placeDate.getShaxar()).append("\n").append(placeDate.getTuman()).append("\n").append(placeDate.getQishloq()).append("\n").append(placeDate.getMFY()).append("\n").append(placeDate.getYerMulkFoydalanuvchisi()).append("\n").append(placeDate.getYerToifasi()).append("\n");
             cell.setCellValue(String.valueOf(stringBuilder));
         }

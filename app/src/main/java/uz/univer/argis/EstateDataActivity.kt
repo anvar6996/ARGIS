@@ -1,12 +1,20 @@
 package uz.univer.argis
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
+import uz.univer.argis.common.Constants
+import uz.univer.argis.common.ExcelUtils
+import uz.univer.argis.common.FileShareUtils
 import uz.univer.argis.databinding.ActivityEstateDataBinding
-import uz.univer.argis.domain.MapsActivity
 import uz.univer.argis.models.EstateData
 import uz.univer.argis.models.export_data.StaticValue
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EstateDataActivity : AppCompatActivity() {
   private lateinit var binding: ActivityEstateDataBinding
@@ -82,10 +90,52 @@ class EstateDataActivity : AppCompatActivity() {
           soliq = soliq.text.toString(),
           qiymati = cost.text.toString(),
         )
-        startActivity(Intent(this@EstateDataActivity, MapsActivity::class.java))
-        finish()
-
+        Toast.makeText(this@EstateDataActivity, StaticValue.placeDate?.viloyat, Toast.LENGTH_SHORT)
+          .show()
+//        generateExelFile()
+//        startActivity(Intent(this@EstateDataActivity, MapsActivity::class.java))
+//        finish()
       }
     }
   }
+
+  private fun generateExelFile() {
+    val isExcelGenerated = ExcelUtils.exportDataIntoWorkbook(
+      application,
+      getCurrentDate() + getCurrentTime() + Constants.EXCEL_FILE_NAME,
+      StaticValue.estateData,
+      StaticValue.landPlotData,
+      StaticValue.placeDate
+    )
+    if (isExcelGenerated) {
+      Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+      onShareButtonClicked()
+    } else {
+      Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
+    }
+  }
+
+  fun onShareButtonClicked() {
+    val fileUri: Uri = initiateSharing()
+    fileUri.let { launchShareFileIntent(it) }
+    launchShareFileIntent(fileUri)
+  }
+
+  private fun launchShareFileIntent(uri: Uri) {
+    val intent = ShareCompat.IntentBuilder.from(this).setType("application/pdf").setStream(uri)
+      .setChooserTitle("Select application to share file").createChooserIntent()
+      .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    startActivity(intent)
+  }
+
+  fun initiateSharing(): Uri {
+    return FileShareUtils.accessFile(application, Constants.EXCEL_FILE_NAME)
+  }
+
+  @SuppressLint("SimpleDateFormat")
+  fun getCurrentDate() = SimpleDateFormat("yyyy-MM-dd").format(Date()).toString()
+
+  @SuppressLint("SimpleDateFormat")
+  fun getCurrentTime() = SimpleDateFormat("HH:mm").format(Date()).toString()
+
 }
