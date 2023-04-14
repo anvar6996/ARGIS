@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import uz.univer.argis.databinding.ActivityLandPlotDataBinding
+import uz.univer.argis.domain.MapsActivity
 import uz.univer.argis.models.LandPlotData
 import uz.univer.argis.models.export_data.StaticValue
 
@@ -20,6 +21,10 @@ class LandPlotDataActivity : AppCompatActivity() {
       loadLandPlotData()
     }
     binding.btnBack.setOnClickListener {
+      finish()
+    }
+    binding.btnMap.setOnClickListener {
+      startActivity(Intent(this@LandPlotDataActivity, MapsActivity::class.java))
       finish()
     }
   }
@@ -82,11 +87,6 @@ class LandPlotDataActivity : AppCompatActivity() {
           soliq = soliq.text.toString(),
           qiymati = cost.text.toString(),
         )
-        Toast.makeText(
-          this@LandPlotDataActivity,
-          StaticValue.placeDate?.viloyat,
-          Toast.LENGTH_SHORT
-        ).show()
         startActivity(Intent(this@LandPlotDataActivity, EstateDataActivity::class.java))
         finish()
       }

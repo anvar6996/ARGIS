@@ -20,6 +20,7 @@ import uz.univer.argis.common.ExcelUtils
 import uz.univer.argis.common.FileShareUtils
 import uz.univer.argis.databinding.ActivityMainBinding
 import uz.univer.argis.domain.MainRepository
+import uz.univer.argis.domain.MapsActivity
 import uz.univer.argis.models.PlaceDate
 import uz.univer.argis.models.export_data.StaticValue
 import java.io.File
@@ -86,6 +87,10 @@ class MainActivity : AppCompatActivity() {
       loadValuePlaceData()
     }
     bind.btnBack.setOnClickListener {
+      finish()
+    }
+    bind.btnMap.setOnClickListener {
+      startActivity(Intent(this@MainActivity, MapsActivity::class.java))
       finish()
     }
   }

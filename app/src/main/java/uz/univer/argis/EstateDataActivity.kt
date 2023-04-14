@@ -30,6 +30,10 @@ class EstateDataActivity : AppCompatActivity() {
     binding.btnBack.setOnClickListener {
       finish()
     }
+    binding.btnMap.setOnClickListener {
+      startActivity(Intent(this@EstateDataActivity, MapsActivity::class.java))
+      finish()
+    }
   }
 
   private fun loadEstateData() {
@@ -92,10 +96,7 @@ class EstateDataActivity : AppCompatActivity() {
         )
         generateExelFile()
       }
-      binding.btnMap.setOnClickListener {
-        startActivity(Intent(this@EstateDataActivity, MapsActivity::class.java))
-        finish()
-      }
+
     }
   }
 
