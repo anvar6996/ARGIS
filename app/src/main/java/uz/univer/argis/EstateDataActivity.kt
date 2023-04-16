@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import uz.univer.argis.common.Constants
@@ -18,11 +19,18 @@ import java.util.*
 
 class EstateDataActivity : AppCompatActivity() {
   private lateinit var binding: ActivityEstateDataBinding
+  private val xuquqTurlari = arrayListOf<String>(
+    "Доимий фойдаланиш", "Ижара", "Мулк"
+  )
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityEstateDataBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+
+    val xuquqAdapter = ArrayAdapter(this, R.layout.item_product_type, xuquqTurlari)
+    binding.xuquqTuri.setAdapter(xuquqAdapter)
 
     binding.btnNext.setOnClickListener {
       loadEstateData()

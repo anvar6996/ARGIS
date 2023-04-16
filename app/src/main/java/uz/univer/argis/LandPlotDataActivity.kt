@@ -2,7 +2,7 @@ package uz.univer.argis
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import uz.univer.argis.databinding.ActivityLandPlotDataBinding
 import uz.univer.argis.domain.MapsActivity
@@ -11,11 +11,17 @@ import uz.univer.argis.models.export_data.StaticValue
 
 class LandPlotDataActivity : AppCompatActivity() {
   private lateinit var binding: ActivityLandPlotDataBinding
+  private val xuquqTurlari = arrayListOf<String>(
+    "Доимий фойдаланиш", "Ижара", "Мулк"
+  )
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityLandPlotDataBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+    val xuquqAdapter = ArrayAdapter(this, R.layout.item_product_type, xuquqTurlari)
+    binding.xuquqTuri.setAdapter(xuquqAdapter)
 
     binding.btnNext.setOnClickListener {
       loadLandPlotData()

@@ -36,6 +36,18 @@ class MainActivity : AppCompatActivity() {
   //  private val viloyatlar = ArrayList<Pair<String, ArrayList<String>>>()
   private val shaxarlar = ArrayList<Pair<String, ArrayList<String>>>()
   private val tumanlar = ArrayList<Pair<String, ArrayList<String>>>()
+  private val yerToifalari = arrayListOf(
+    "Қишлоқ хўжалигига мулжалланган ерлар",
+    "Аҳоли пунктлари ерлари",
+    "Саноат, транспорт, алоқа мудофаа ва бошқа ерлар",
+    "Табиатни муҳофаза қилишга мўлжалланган ерлар",
+    "Тарихий - маданий аҳамиятга молик ерлар",
+    "Ўрмон фонди ерлари",
+    "Сув фонди ерлари",
+    "Захира ерлар"
+  )
+  private val foydalanuvchilarTuri = arrayListOf<String>("YURIDIK", "JISMONIY")
+
   private val filePath: File = File("${Environment.getExternalStorageDirectory()}/Demo.xls")
 
   private val locationPermissionRequest = registerForActivityResult(
@@ -68,6 +80,15 @@ class MainActivity : AppCompatActivity() {
     loadTumanlar()
     val adapterRegions = ArrayAdapter(this, R.layout.item_product_type, repository.listRegions)
     bind.viloyat.setAdapter(adapterRegions)
+
+    val adapterYerToifalari = ArrayAdapter(this, R.layout.item_product_type, yerToifalari)
+    bind.yerToifasi.setAdapter(adapterYerToifalari)
+
+    val adapterFoydalanuvchilarTurlari =
+      ArrayAdapter(this, R.layout.item_product_type, foydalanuvchilarTuri)
+    bind.yerVaMulk.setAdapter(adapterFoydalanuvchilarTurlari)
+
+
 
     bind.viloyat.onItemClickListener =
       AdapterView.OnItemClickListener { parent, view, position, id ->
